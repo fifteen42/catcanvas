@@ -131,3 +131,15 @@ function drawCat(ctx) {
   ctx.strokeStyle = "black";
   ctx.stroke();
 }
+
+function drawSquareFrame(ctx) {
+  const size = 200; // 正方形框的大小
+  const x = 150; // 正方形框左上角的 x 坐标
+  const y = 150; // 正方形框左上角的 y 坐标
+
+  ctx.strokeStyle = "black"; // 设置线条颜色
+  ctx.lineWidth = 2; // 设置线条宽度
+  ctx.strokeRect(x, y, size, size); // 绘制正方形框
+}
+
+export { drawCat, drawSquareFrame };
