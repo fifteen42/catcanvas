@@ -1,4 +1,5 @@
-import { drawSquareFrame } from "../canvas.js";
+import Square from "../shapes/Square.js";
+import { squares, addSquare } from "../globals.js";
 
 const template = document.createElement("template");
 
@@ -33,13 +34,11 @@ class SquareButton extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
 
     const button = shadowRoot.getElementById("squareButton");
-    const canvas = document.getElementById("canvas");
-    console.log(canvas);
-    const ctx = canvas.getContext("2d");
-
     button.addEventListener("click", () => {
-      console.log("world");
-      drawSquareFrame(ctx);
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      const size = Math.random() * 50 + 20;
+      addSquare(x, y, size, "black");
       this.dispatchEvent(
         new CustomEvent("button-click", { detail: "Button was clicked!" })
       );
