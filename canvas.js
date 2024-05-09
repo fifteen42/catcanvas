@@ -1,4 +1,4 @@
-import { globalScale, setScale, squares } from "./globals.js";
+import { globalScale, setScale, shapes } from "./globals.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("canvas");
@@ -15,34 +15,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const MAX_SCALE = 2;
   const SCALE_FACTOR = 1.1;
 
-  squares.addListener(draw);
+  shapes.addListener(draw);
 
-  let selectedSquare = null; // 当前被选中的方块
+  let selectedShape = null; // 当前被选中的方块
 
   canvas.addEventListener("mousedown", function (e) {
     const x = (e.offsetX - offsetX) / globalScale;
     const y = (e.offsetY - offsetY) / globalScale;
 
-    const realSqaures = squares.array;
+    const realShapes = shapes.array;
 
-    for (let i = realSqaures.length - 1; i >= 0; i--) {
-      if (realSqaures[i].contains(x, y)) {
-        selectedSquare = realSqaures[i];
-        selectedSquare.setIsDragging(true);
+    for (let i = realShapes.length - 1; i >= 0; i--) {
+      if (realShapes[i].contains(x, y)) {
+        selectedShape = realShapes[i];
+        selectedShape.setIsDragging(true);
         lastX = e.offsetX;
         lastY = e.offsetY;
         break;
       }
     }
-
-    // console.log(selectedSquare);
   });
 
   canvas.addEventListener("mousemove", function (e) {
-    if (selectedSquare && selectedSquare.isDragging) {
+    if (selectedShape && selectedShape.isDragging) {
       const dx = (e.offsetX - lastX) / globalScale;
       const dy = (e.offsetY - lastY) / globalScale;
-      selectedSquare.translate(dx, dy);
+      selectedShape.translate(dx, dy);
       lastX = e.offsetX;
       lastY = e.offsetY;
       draw();
@@ -50,9 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   canvas.addEventListener("mouseup", function () {
-    if (selectedSquare) {
-      selectedSquare.setIsDragging(false);
-      selectedSquare = null;
+    if (selectedShape) {
+      selectedShape.setIsDragging(false);
+      selectedShape = null;
     }
   });
 
@@ -75,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.save();
     ctx.translate(offsetX, offsetY);
     ctx.scale(globalScale, globalScale);
-    squares.array.forEach((square) => {
-      square.draw(ctx);
+    shapes.array.forEach((shape) => {
+      shape.draw(ctx);
     });
     ctx.restore();
   }

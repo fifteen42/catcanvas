@@ -1,4 +1,4 @@
-import { addSquare } from "../globals.js";
+import { addCircle } from "../globals.js";
 
 const template = document.createElement("template");
 
@@ -20,24 +20,24 @@ template.innerHTML = `
         box-shadow: 1px 1px 1px black;
       }
     </style>
-    <button id="squareButton">
-      <div style="padding: 10px; border: 1px solid black;" >
+    <button id="circleButton">
+      <div style="padding: 10px; border: 1px solid black; border-radius: 50%" >
       </div>
     </button>
 `;
 
-class SquareButton extends HTMLElement {
+class CircleButton extends HTMLElement {
   constructor() {
     super();
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.appendChild(template.content.cloneNode(true));
 
-    const button = shadowRoot.getElementById("squareButton");
+    const button = shadowRoot.getElementById("circleButton");
     button.addEventListener("click", () => {
       const x = Math.random() * window.innerWidth;
       const y = Math.random() * window.innerHeight;
-      const size = Math.random() * 50 + 20;
-      addSquare(x, y, size, "black");
+      const radius = Math.random() * 30 + 5;
+      addCircle(x, y, radius, "black");
       this.dispatchEvent(
         new CustomEvent("button-click", { detail: "Button was clicked!" })
       );
@@ -45,4 +45,4 @@ class SquareButton extends HTMLElement {
   }
 }
 
-customElements.define("square-button", SquareButton);
+customElements.define("circle-button", CircleButton);
