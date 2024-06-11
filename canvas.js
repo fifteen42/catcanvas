@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   shapes.addListener(draw);
 
-  let selectedShape = null; // 当前被选中的方块
+  let selectedShape = null;
 
   canvas.addEventListener("mousedown", function (e) {
     const x = (e.offsetX - offsetX) / globalScale;

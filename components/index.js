@@ -1,2 +1,3 @@
-import "./square-button.js";
-import "./circle-button.js";
+import "./square-button/index.js";
+import "./circle-button/index.js";
+import "./triangle-button/index.js";
