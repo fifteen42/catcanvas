@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+}
+#wholepage {
+  display: flex;
+}
+
+#canvas {
+  flex: auto;
+}
+
+#functionBar {
+  background: #fff;
+  display: flex;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%);
+  box-shadow: 0 1px 3px gray;
+  border-radius: 10px;
+}
