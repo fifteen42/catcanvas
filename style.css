@@ -6,6 +6,7 @@ body {
 }
 
 #canvas {
+  background-color: rgb(249, 250, 251);
   flex: auto;
 }
 

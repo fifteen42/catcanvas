@@ -56,13 +56,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
   canvas.addEventListener("wheel", function (e) {
     e.preventDefault();
+
+    const mouseX = e.offsetX;
+    // console.log(`mouseX:${mouseX}`);
+    const mouseY = e.offsetY;
+    // console.log(`mouseY:${mouseY}`);
+
     const oldScale = globalScale;
+    let newScale = globalScale;
+
     if (e.deltaY < 0) {
-      setScale(globalScale * SCALE_FACTOR);
+      newScale *= SCALE_FACTOR;
     } else {
-      setScale(globalScale / SCALE_FACTOR);
+      newScale /= SCALE_FACTOR;
     }
-    setScale(Math.min(Math.max(globalScale, MIN_SCALE), MAX_SCALE));
+
+    newScale = Math.min(Math.max(newScale, MIN_SCALE), MAX_SCALE);
+
+    // 调整 offsetX 和 offsetY 以确保缩放中心为鼠标位置
+    const scaleRatio = newScale / oldScale;
+    offsetX = mouseX - scaleRatio * (mouseX - offsetX);
+    offsetY = mouseY - scaleRatio * (mouseY - offsetY);
+
+    setScale(newScale);
+
     if (globalScale !== oldScale) {
       draw();
     }
