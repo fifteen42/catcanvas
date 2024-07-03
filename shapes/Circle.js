@@ -21,10 +21,10 @@ export default class Circle extends BaseShape {
   }
 
   contains(x, y) {
-    // 计算点 (x, y) 是否在圆内
-    const dx = this.x - x; // 横向距离
-    const dy = this.y - y; // 纵向距离
-    return dx * dx + dy * dy <= this.radius * this.radius; // 判断点到圆心的距离是否小于等于半径
+    // 使用 this.x + this.offsetX 和 this.y + this.offsetY 来获取实际位置
+    const dx = this.x + this.offsetX - x;
+    const dy = this.y + this.offsetY - y;
+    return dx * dx + dy * dy <= this.radius * this.radius;
   }
 
   // 添加圆形特有的方法
