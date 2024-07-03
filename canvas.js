@@ -4,8 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
+  canvas.style.width = `${window.innerWidth}px`;
+  canvas.style.height = `${window.innerHeight}px`;
+  ctx.scale(dpr, dpr);
 
   let lastX = 0;
   let lastY = 0;
